@@ -1,4 +1,6 @@
 // components/organisms/LoginCard.jsx
+import React from "react";
+
 import LoginForm from "../molecules/LoginForm";
 import Avatar from "../atoms/Avatar";
 
