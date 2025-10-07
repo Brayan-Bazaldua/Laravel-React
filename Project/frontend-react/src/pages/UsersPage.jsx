@@ -1,15 +1,16 @@
 import React from "react";
+import DashboardLayout from "../components/templates/Dashboard";
 import UsersTable from "../components/organisms/UsersTable";
-import Button from "../components/atoms/Button";
 
-export default function UsersPage({ onLogout }) {
+export default function UsersPage() {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
-    <div className="p-8">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Usuarios</h1>
-        <Button onClick={onLogout}>Cerrar sesión</Button>
-      </div>
+    <DashboardLayout onLogout={handleLogout}>
       <UsersTable />
-    </div>
+    </DashboardLayout>
   );
 }

@@ -1,13 +1,17 @@
 import React from "react";
 
-export default function Input({ type, placeholder, value, onChange }) {
+// components/atoms/Input.jsx
+export default function Input({ label, icon: Icon, ...props }) {
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className="border rounded-md px-3 py-2 w-full focus:ring-2 focus:ring-blue-400"
-    />
+    <div className="flex flex-col w-full">
+      {label && <label className="text-sm text-gray-300 mb-1">{label}</label>}
+      <div className="flex items-center bg-white/10 rounded-xl p-2 backdrop-blur-md">
+        {Icon && <Icon className="text-gray-400 mr-2" size={18} />}
+        <input
+          {...props}
+          className="bg-transparent outline-none text-white w-full placeholder-gray-400"
+        />
+      </div>
+    </div>
   );
 }

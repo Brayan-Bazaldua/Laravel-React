@@ -1,24 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import UsersPage from "./pages/UsersPage";
+import UsersPage from "./pages/UsersPage"; // ← esta será tu tabla
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("token")
-  );
-
+export default function App() {
   return (
-    <>
-      {isLoggedIn ? (
-        <UsersPage onLogout={() => {
-          localStorage.removeItem("token");
-          setIsLoggedIn(false);
-        }} />
-      ) : (
-        <LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/users" element={<UsersPage />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;

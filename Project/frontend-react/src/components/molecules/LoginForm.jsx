@@ -1,41 +1,22 @@
-import React, { useState } from "react";
-import Input from "../atoms/Input";
+// components/molecules/LoginForm.jsx
+import Input from "../atoms/InputField";
 import Button from "../atoms/Button";
-import api from "../../services/api";
+import { Mail, Lock } from "lucide-react";
 
-export default function LoginForm({ onLoginSuccess }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await api.post("/login", { email, password });
-      localStorage.setItem("token", res.data.token);
-      onLoginSuccess();
-    } catch (err) {
-      setError("Credenciales incorrectas");
-    }
-  };
-
+export default function LoginForm() {
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Input
-        type="email"
-        placeholder="Correo electrónico"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && <p className="text-red-500">{error}</p>}
-      <Button type="submit">Iniciar sesión</Button>
+    <form className="flex flex-col gap-4">
+      <Input label="Email ID" icon={Mail} type="email" placeholder="email@example.com" />
+      <Input label="Password" icon={Lock} type="password" placeholder="••••••••" />
+      <div className="flex justify-between items-center">
+        <Button type="submit">Login</Button>
+        <a href="#" className="text-sm text-gray-400 hover:text-white">
+          Forgot Password?
+        </a>
+      </div>
+      <a href="#" className="text-center text-sm text-indigo-400 hover:text-indigo-200">
+        Register
+      </a>
     </form>
   );
 }
